@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+    svg { background-color: #eee; }
+  svg .municipality { fill: red; }
+    svg .municipality:hover { stroke: #333; }
+    svg .municipality.p0 { fill: #e0f3db; }
+    svg .municipality.p1 { fill: #a8ddb5; }
+    svg .municipality.p2 { fill: #7bccc4; }
+    svg .municipality.p3 { fill: #4eb3d3; }
+    svg .municipality.p4 { fill: #2b8cbe; }
+    svg .municipality.p5 { fill: #0868ac; }
+    svg .municipality.p6 { fill: #084081; }
+    svg text { font-size: 10px; }
+    </style>
+  </head>
+  <body>
+
+    <div id="chart"></div>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+    <script src="https://d3js.org/queue.v1.min.js"></script>
+    <script>
+    var width = 800,
+        height = 600;
+
+    var svg = d3.select("#chart").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    var map = svg.append("g").attr("id", "map"),
+        places = svg.append("g").attr("id", "places");
+
+    var projection = d3.geo.mercator()
+        .center([126.9895, 37.5651])
+        .scale(100000)
+        .translate([width/2, height/2]);
+
+    var path = d3.geo.path().projection(projection);
+
+    var quantize = d3.scale.quantize()
+        .domain([0,90])
+        .range(d3.range(6).map(function(i) { return "p"+ i; }));
+
+    var popByName = d3.map();
+
+    queue()
+        .defer(d3.json, "seoul_municipalities_topo_simple.json")
+        .defer(d3.csv, "df_cnt.csv", function(d) {
+            popByName.set(d.name, +d.population);
+        })
+        .await(ready);
+
+    function ready(error, data) {
+      var features = topojson.feature(data, data.objects.seoul_municipalities_geo).features;
+
+      features.forEach(function(d) {
+        d.properties.population = popByName.get(d.properties.name);
+        d.properties.density = d.properties.population
+        d.properties.quantized = quantize(d.properties.density);
+      });
+
+      svg.selectAll("path")
+          .data(features)
+        .enter().append("path")
+          .attr("class", function(d) { return "municipality " + d.properties.quantized; })
+          .attr("d", path)
+          .attr("id", function(d) { return d.properties.name; })
+        .append("title")
+        .text(function(d) { return d.properties.name + ": " + d.properties.population + "명" });
+
+      svg.selectAll("text")
+          .data(features.filter(function(d) { return d.properties.name; }))
+        .enter().append("text")
+          .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+          .attr("dy", ".35em")
+          .attr("class", "region-label")
+          .text(function(d) { return d.properties.name+"\n"+d.properties.population; });
+
+    }
+
+    </script>
+    <h4>교통사고 다발 지역의 수 - 운전미숙 사고유형으로 일어난 사고 수 (구별) </h4>
+  </body>
+</html>
