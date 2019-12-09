@@ -2,24 +2,27 @@
 <meta charset="utf-8">
 <style>
 
-.arc text {
-  font: 10px sans-serif;
-  text-anchor: middle;
-}
-
-.arc path {
-  stroke: #fff;
-}
+.arc text { font: 10px sans-serif; text-anchor: middle; }
+.arc path { stroke: #fff; }
 
 </style>
-<svg width="960" height="650"></svg>
+<style type="text/css">
+  @font-face {font-family:"NanumBarunGothic"; src:url('NanumBarunGothic.otf');}
+  h1 { font-size:40px; font-family:"NanumBarunGothic";}
+  h2 { font-size:25px; font-family:"NanumBarunGothic";}
+  p { color: #000000; font-size:20px; font-family:"NanumBarunGothic";}
+</style>
+
+  <h1><br>전체 데이터 파악</h1>
+  <h2>2015~18년도 전체 사망교통사고정보의 사고 유형</h2>
+
+<svg width="760" height="450"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
-
 var svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height"),
-    radius = Math.min(width, height-300) / 2,
+    radius = Math.min(width, height-100) / 2,
     g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 var color = d3.scaleOrdinal(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
@@ -58,27 +61,23 @@ d3.csv("df_summary_2.csv", function(d) {
       .style("font-size","17px");
       /*.text(function(d) { return d.data.Accident_type; });*/
 
-  svg.append("circle").attr("cx",140).attr("cy",200).attr("r", 6).style("fill", "#98abc5")
-  svg.append("circle").attr("cx",140).attr("cy",220).attr("r", 6).style("fill", "#8a89a6")
-  svg.append("circle").attr("cx",140).attr("cy",240).attr("r", 6).style("fill", "#7b6888")
-  svg.append("circle").attr("cx",140).attr("cy",260).attr("r", 6).style("fill", "#6b486b")
-  svg.append("circle").attr("cx",140).attr("cy",280).attr("r", 6).style("fill", "#a05d56")
-  svg.append("circle").attr("cx",140).attr("cy",300).attr("r", 6).style("fill", "#d0743c")
-  svg.append("circle").attr("cx",140).attr("cy",320).attr("r", 6).style("fill", "#ff8c00")
-  svg.append("text").attr("x", 160).attr("y", 200).text("충돌").style("font-size", "15px").attr("alignment-baseline","middle")
-  svg.append("text").attr("x", 160).attr("y", 220).text("보도통행중").style("font-size", "15px").attr("alignment-baseline","middle")
-  svg.append("text").attr("x", 160).attr("y", 240).text("기타").style("font-size", "15px").attr("alignment-baseline","middle")
-  svg.append("text").attr("x", 160).attr("y", 260).text("추돌").style("font-size", "15px").attr("alignment-baseline","middle")
-  svg.append("text").attr("x", 160).attr("y", 280).text("전도전복").style("font-size", "15px").attr("alignment-baseline","middle")
-  svg.append("text").attr("x", 160).attr("y", 300).text("차도통행중").style("font-size", "15px").attr("alignment-baseline","middle")
-  svg.append("text").attr("x", 160).attr("y", 320).text("그 외").style("font-size", "15px").attr("alignment-baseline","middle")
-
-  svg.append("text").attr("x", width/3).attr("y", 110).text("2015~2018년도 사망교통사고유형").style("font-size", "20px").attr("alignment-baseline","middle")
-
-
-
-
-
+  svg.append("circle").attr("cx",90).attr("cy",150).attr("r", 6).style("fill", "#98abc5")
+  svg.append("circle").attr("cx",90).attr("cy",170).attr("r", 6).style("fill", "#8a89a6")
+  svg.append("circle").attr("cx",90).attr("cy",190).attr("r", 6).style("fill", "#7b6888")
+  svg.append("circle").attr("cx",90).attr("cy",210).attr("r", 6).style("fill", "#6b486b")
+  svg.append("circle").attr("cx",90).attr("cy",230).attr("r", 6).style("fill", "#a05d56")
+  svg.append("circle").attr("cx",90).attr("cy",250).attr("r", 6).style("fill", "#d0743c")
+  svg.append("circle").attr("cx",90).attr("cy",270).attr("r", 6).style("fill", "#ff8c00")
+  svg.append("text").attr("x", 110).attr("y", 150).text("충돌").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 110).attr("y", 170).text("보도통행중").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 110).attr("y", 190).text("기타").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 110).attr("y", 210).text("추돌").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 110).attr("y", 230).text("전도전복").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 110).attr("y", 250).text("차도통행중").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 110).attr("y", 270).text("그 외").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", width/3).attr("y", 30).text("2015~2018년도 사망교통사고유형").style("font-size", "20px").attr("alignment-baseline","middle")
 });
-
 </script>
+<p>2015~2018년의 모든 데이터로 사망교통사고의 유형을 알아보니 충돌, 보도 통행 중, 기타, 추돌의 순서로 많았다.<br>
+운전 미숙자를 구분하는 기준으로 사용 할 ‘측면 충돌’이 포함 된 ‘충돌’과 ‘보도 통행 중’이 상위에 있으므로<br>
+운전 미숙으로 인한 사고가 많다고 예상할 수 있다.</p>

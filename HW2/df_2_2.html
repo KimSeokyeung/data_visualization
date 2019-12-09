@@ -12,14 +12,24 @@
 }
 
 </style>
-<svg width="960" height="650"></svg>
+<style type="text/css">
+  @font-face {font-family:"NanumBarunGothic"; src:url('NanumBarunGothic.otf');}
+  h1 { font-size:40px; font-family:"NanumBarunGothic";}
+  h2 { font-size:25px; font-family:"NanumBarunGothic";}
+  p { color: #000000; font-size:20px; font-family:"NanumBarunGothic";}
+</style>
+
+  <h1><br>가설 2</h1>
+  <h2>운전 미숙자들은 야간에 교통사고를 더 많이 낼 것이다.</h2>
+  <p>→ 생각한 이유 : 야간 운전 시에는 시야의 범위가 좁아져 운전하기도 힘들고 보행자나 위험 물체 발견이 늦어지기 때문.</p>
+<svg width="760" height="450"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 
 var svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height"),
-    radius = Math.min(width, height-300) / 2,
+    radius = Math.min(width, height-100) / 2,
     g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 var color = d3.scaleOrdinal(["#98abc5","#ff8c00"]);
@@ -60,10 +70,10 @@ d3.csv("df_2_2.csv", function(d) {
 
 
 
-  svg.append("text").attr("x", 330).attr("y", 325).text("주간").style("font-size", "20px").attr("alignment-baseline","middle")
-  svg.append("text").attr("x", 585).attr("y", 330).text("야간").style("font-size", "20px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 250).attr("y", 205).text("주간").style("font-size", "20px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 465).attr("y", 200).text("야간").style("font-size", "20px").attr("alignment-baseline","middle")
 
-  svg.append("text").attr("x", width/3 -40).attr("y", 110).text("운전미숙자의 주/야 사망교통사고 발생 비율").style("font-size", "20px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", width/3 -40).attr("y", 30).text("운전미숙자의 주/야 사망교통사고 발생 비율").style("font-size", "20px").attr("alignment-baseline","middle")
 
 
 
@@ -72,3 +82,5 @@ d3.csv("df_2_2.csv", function(d) {
 });
 
 </script>
+<p>주간과 야간의 사고 비율을 비교해보았더니, 전체와 운전미숙자 모두 주/야의 차이가 별로 나지 않는다.<br>
+따라서 ‘운전 미숙자의 사고 위험도가 높은 유형’으로 일어나는 사고는 주/야에 상관없이 발생한다고 볼 수 있다.</p>

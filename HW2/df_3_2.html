@@ -12,14 +12,24 @@
 }
 
 </style>
-<svg width="960" height="650"></svg>
+<style type="text/css">
+  @font-face {font-family:"NanumBarunGothic"; src:url('NanumBarunGothic.otf');}
+  h1 { font-size:40px; font-family:"NanumBarunGothic";}
+  h2 { font-size:25px; font-family:"NanumBarunGothic";}
+  p { color: #000000; font-size:20px; font-family:"NanumBarunGothic";}
+</style>
+
+  <h1><br>가설 3</h1>
+  <h2>‘사상자들 수 중에서 사망자의 비율’은 전체 데이터보다 운전 미숙자 데이터에서 더 작을 것이다.</h2>
+  <p>→ 생각한 이유 : 운전이 미숙하기 때문에 대형사고 보다는 가벼운 접촉사고가 많을 것이라고 생각.</p>
+<svg width="760" height="450"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 
 var svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height"),
-    radius = Math.min(width, height-300) / 2,
+    radius = Math.min(width, height-100) / 2,
     g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 var color = d3.scaleOrdinal(["#b33040", "#d25c4d", "#f2b447", "#d9d574"]);
@@ -58,16 +68,16 @@ d3.csv("df_3_2.csv", function(d) {
       .style("font-size","20px");
       /*.text(function(d) { return d.data.accident; });*/
 
-  svg.append("circle").attr("cx",140).attr("cy",200).attr("r", 6).style("fill", "#b33040")
-  svg.append("circle").attr("cx",140).attr("cy",220).attr("r", 6).style("fill", "#d25c4d")
-  svg.append("circle").attr("cx",140).attr("cy",240).attr("r", 6).style("fill", "#f2b447")
-  svg.append("circle").attr("cx",140).attr("cy",260).attr("r", 6).style("fill", "#d9d574")
-  svg.append("text").attr("x", 160).attr("y", 200).text("사망자 비율").style("font-size", "15px").attr("alignment-baseline","middle")
-  svg.append("text").attr("x", 160).attr("y", 220).text("중상자 비율").style("font-size", "15px").attr("alignment-baseline","middle")
-  svg.append("text").attr("x", 160).attr("y", 240).text("경상자 비율").style("font-size", "15px").attr("alignment-baseline","middle")
-  svg.append("text").attr("x", 160).attr("y", 260).text("부상신고자 비율").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("circle").attr("cx",70).attr("cy",150).attr("r", 6).style("fill", "#b33040")
+  svg.append("circle").attr("cx",70).attr("cy",170).attr("r", 6).style("fill", "#d25c4d")
+  svg.append("circle").attr("cx",70).attr("cy",190).attr("r", 6).style("fill", "#f2b447")
+  svg.append("circle").attr("cx",70).attr("cy",210).attr("r", 6).style("fill", "#d9d574")
+  svg.append("text").attr("x", 90).attr("y", 150).text("사망자 비율").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 90).attr("y", 170).text("중상자 비율").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 90).attr("y", 190).text("경상자 비율").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 90).attr("y", 210).text("부상신고자 비율").style("font-size", "15px").attr("alignment-baseline","middle")
 
-  svg.append("text").attr("x", width/3-25).attr("y", 110).text("운전미숙자의 사망교통사고 사상자 비율").style("font-size", "20px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", width/3-25).attr("y", 30).text("운전미숙자의 사망교통사고 사상자 비율").style("font-size", "20px").attr("alignment-baseline","middle")
 
 
 
@@ -76,3 +86,7 @@ d3.csv("df_3_2.csv", function(d) {
 });
 
 </script>
+<p>사상자 중 사망자의 비율은 전체 사망교통사고에서 65.27%, 운전 미숙자의 사망교통사고에서 73.75%이다.<br>
+중상자 까지 보더라도 전체는 81.5% 운전 미숙자는 86.07%로 운전 미숙자 데이터에서 더 높은 것을 볼 수 있다.<br>
+따라서 ‘운전 미숙자의 사고 위험도가 높은 유형’으로 사고가 일어난다면 사상자의 피해가 크다고 볼 수 있다.<br>
+</p>
