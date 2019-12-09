@@ -17,6 +17,17 @@
     </style>
   </head>
   <body>
+    <style type="text/css">
+      @font-face {font-family:"NanumBarunGothic"; src:url('NanumBarunGothic.otf');}
+      h1 { font-size:40px; font-family:"NanumBarunGothic";}
+      h2 { font-size:25px; font-family:"NanumBarunGothic";}
+      p { color: #000000; font-size:20px; font-family:"NanumBarunGothic";}
+    </style>
+
+      <h1><br>가설</h1>
+      <h2>교통사고 다발지역에 운전미숙에 관련된 사고 유형이 많이 일어나지 않을 것이다.</h2>
+      <p>→ 생각한 이유 : 교통사고 다발 지역은 대부분 주행환경이 좋지 않아 다수의 운전자들이 사고 위험이 있는<br> 지역이기 때문에
+단순히 운전이 미숙해서 발생하는 유형의 사고 유형은 많이 일어나지 않을 것이라고 생각하기 때문.</p>
 
     <div id="chart"></div>
     <script src="https://d3js.org/d3.v3.min.js"></script>
@@ -82,6 +93,9 @@
     }
 
     </script>
-    <h4>교통사고 다발 지역의 수 - 운전미숙 사고유형으로 일어난 사고 수 (구별) </h4>
+    <p>구별로 ‘교통사고 다발 지역의 수 – 운전미숙 사고유형으로 일어난 사고 수’를 계산해보았더니 <br>서울 외곽으로 갈수록
+값이 커지며 시각화의 색이 진해진다. 즉, 현저하게 ‘교통사고 다발 지역’이 더 많다는 의미이다.<br>
+교통사고 다발 지역이 애초에 서울 외곽 부분에 많았던 것을 생각하면 교통사고 다발 지역에는 운전미숙에 <br>관련된 사고 유형보다는
+다른 유형의 사고들이 많이 일어난다고 예상할 수 있다.</p>
   </body>
 </html>
