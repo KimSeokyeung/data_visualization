@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.arc text {
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+.arc path {
+  stroke: #fff;
+}
+
+</style>
+<svg width="960" height="700"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height"),
+    radius = Math.min(width, height-300) / 2,
+    g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+var color = d3.scaleOrdinal(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+
+var pie = d3.pie()
+    .sort(null)
+    .value(function(d) { return d.cnt; });
+
+var path = d3.arc()
+    .outerRadius(radius - 10)
+    .innerRadius(radius - 130);
+
+var label = d3.arc()
+    .outerRadius(radius - 40)
+    .innerRadius(radius - 100);
+
+d3.csv("df_summary_2.csv", function(d) {
+  d.cnt = +d.cnt;
+  return d;
+}, function(error, data) {
+  if (error) throw error;
+
+  var arc = g.selectAll(".arc")
+    .data(pie(data))
+    .enter().append("g")
+      .attr("class", "arc");
+
+  arc.append("path")
+      .attr("d", path)
+      .attr("fill", function(d) { return color(d.data.cnt); });
+
+  arc.append("text")
+      .attr("transform", function(d) { return "translate(" + label.centroid(d) + ")"; })
+      .attr("dy", "0.35em")
+      .text(function(d) { return d.data.cnt; })
+      .style("font-size","17px");
+      /*.text(function(d) { return d.data.Accident_type; });*/
+
+  svg.append("circle").attr("cx",140).attr("cy",200).attr("r", 6).style("fill", "#98abc5")
+  svg.append("circle").attr("cx",140).attr("cy",220).attr("r", 6).style("fill", "#8a89a6")
+  svg.append("circle").attr("cx",140).attr("cy",240).attr("r", 6).style("fill", "#7b6888")
+  svg.append("circle").attr("cx",140).attr("cy",260).attr("r", 6).style("fill", "#6b486b")
+  svg.append("circle").attr("cx",140).attr("cy",280).attr("r", 6).style("fill", "#a05d56")
+  svg.append("circle").attr("cx",140).attr("cy",300).attr("r", 6).style("fill", "#d0743c")
+  svg.append("circle").attr("cx",140).attr("cy",320).attr("r", 6).style("fill", "#ff8c00")
+  svg.append("text").attr("x", 160).attr("y", 200).text("충돌").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 160).attr("y", 220).text("보도통행중").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 160).attr("y", 240).text("기타").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 160).attr("y", 260).text("추돌").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 160).attr("y", 280).text("전도전복").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 160).attr("y", 300).text("차도통행중").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 160).attr("y", 320).text("그 외").style("font-size", "15px").attr("alignment-baseline","middle")
+
+  svg.append("text").attr("x", width/3).attr("y", 110).text("2015~2018년도 사망교통사고유형").style("font-size", "20px").attr("alignment-baseline","middle")
+
+
+
+
+
+});
+
+</script>
