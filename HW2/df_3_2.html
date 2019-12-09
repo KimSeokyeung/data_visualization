@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.arc text {
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+.arc path {
+  stroke: #fff;
+}
+
+</style>
+<svg width="960" height="700"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height"),
+    radius = Math.min(width, height-300) / 2,
+    g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+var color = d3.scaleOrdinal(["#b33040", "#d25c4d", "#f2b447", "#d9d574"]);
+
+var pie = d3.pie()
+    .sort(null)
+    .value(function(d) { return d.percent; });
+
+var path = d3.arc()
+    .outerRadius(radius - 10)
+    .innerRadius(radius - 130);
+
+var label = d3.arc()
+    .outerRadius(radius - 40)
+    .innerRadius(radius - 100);
+
+d3.csv("df_3_2.csv", function(d) {
+  d.percent = +d.percent;
+  return d;
+}, function(error, data) {
+  if (error) throw error;
+
+  var arc = g.selectAll(".arc")
+    .data(pie(data))
+    .enter().append("g")
+      .attr("class", "arc");
+
+  arc.append("path")
+      .attr("d", path)
+      .attr("fill", function(d) { return color(d.data.percent); });
+
+  arc.append("text")
+      .attr("transform", function(d) { return "translate(" + label.centroid(d) + ")"; })
+      .attr("dy", "0.35em")
+      .text(function(d) { return d.data.percent + '%'; })
+      .style("font-size","20px");
+      /*.text(function(d) { return d.data.accident; });*/
+
+  svg.append("circle").attr("cx",140).attr("cy",200).attr("r", 6).style("fill", "#b33040")
+  svg.append("circle").attr("cx",140).attr("cy",220).attr("r", 6).style("fill", "#d25c4d")
+  svg.append("circle").attr("cx",140).attr("cy",240).attr("r", 6).style("fill", "#f2b447")
+  svg.append("circle").attr("cx",140).attr("cy",260).attr("r", 6).style("fill", "#d9d574")
+  svg.append("text").attr("x", 160).attr("y", 200).text("사망자 비율").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 160).attr("y", 220).text("중상자 비율").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 160).attr("y", 240).text("경상자 비율").style("font-size", "15px").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 160).attr("y", 260).text("부상신고자 비율").style("font-size", "15px").attr("alignment-baseline","middle")
+
+  svg.append("text").attr("x", width/3-25).attr("y", 110).text("운전미숙자의 사망교통사고 사상자 비율").style("font-size", "20px").attr("alignment-baseline","middle")
+
+
+
+
+
+});
+
+</script>

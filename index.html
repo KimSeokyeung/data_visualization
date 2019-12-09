@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Data Visualization</title>
+</head>
+<body>
+<style type="text/css">
+@font-face {font-family:"NanumBarunGothic"; src:url('NanumBarunGothic.otf');}
+
+.flex-container {display: -webkit-flex; display: flex; -webkit-flex-flow: row wrap; flex-flow: row wrap;}
+.flex-container > * {padding: 15px; -webkit-flex: 1 100%; flex: 1 100%;}
+
+header {background-color:#2C3539;color:white;font-family:"NanumBarunGothic";}
+
+.nav {width:70px; height: 750px; background-color:#F6F6F6; float:left; text-align:left;}
+.nav ul {list-style-type: none; padding: 0; font-size:10px; color:#5A7CC0;}
+.nav ul a {text-decoration: none; font-size:17px;font-family:"NanumBarunGothic";color: #000000;}
+.nav ul a:hover {color:#FFCBCB;}
+.nav li a{display:block; padding:20px; margin:10;}
+
+.article {text-align: left;}
+
+@media all and (min-width: 768px) {
+    .nav {text-align:left;-webkit-flex: 1 auto;flex:1 auto;-webkit-order:1;order:1;}
+    .article {-webkit-flex:5 0px;flex:5 0px;-webkit-order:2;order:2;}
+    footer {-webkit-order:3;order:3;}
+}
+P {font-family:"NanumBarunGothic";}
+h1 {font-size:50px; color:white;font-family:"NanumBarunGothic";}
+a {text-decoration: none;}
+</style>
+
+<div class="flex-container">
+<header id="bg">
+  <center><a href="index2_hypothesis.html" target="main_area" title="home"><h1>Data Visualization _ Final<br></h1></a></center>
+</header>
+
+<script type = "text/javascript">
+    function changeColor(color) {
+       document.getElementById("bg").style.background= color;
+       document.getElementById("bg2").style.background= color;
+    }
+</script>
+
+<nav class="nav">
+<ul>
+  <li><a href="HW2/df_summary_1.html" target="main_area" title="click">전체 사망교통사고의 교통 사상자 수<br></a></li>
+  <li><a href="HW2/df_summary_2.html" target="main_area" title="click">전체 사망교통사고 정보의 사고 유형<br></a></li>
+  <li><a href="HW2/df_1_3.html" target="main_area" title="click">가설1)<br>운전미숙과 관련된 사고 유형의 사고 추세<br></a></li>
+  <li><a href="HW2/df_2_2.html" target="main_area" title="click">가설2)<br>운전미숙자의 주/야 사망교통사고 발생 비율<br></a></li>
+  <li><a href="HW2/df_3_2.html" target="main_area" title="click">가설3)<br>운전미숙자의 사망교통사고 사상자 비율<br></a></li>
+  <li><a href="HW3/hw3_1.html" target="main_area" title="click">가설4)<br>교통사고 다발지역 & 운전 미숙 사고유형 사망 교통사고 발생 지역<br></a></li>
+  <li><a href="HW3/hw3_2.html" target="main_area" title="click">가설5)<br>'교통사고 다발지역의 수 - 운전미숙 사고 유형'으로 일어난 사고 수<br></a></li>
+</ul>
+</nav>
+
+<article class="article">
+<iframe name="main_area" src="index2_hypothesis.html" width="1500px" height="700px" style="border:none"></iframe>
+</article>
+
+
+</div>
+
+</body>
+</html>
