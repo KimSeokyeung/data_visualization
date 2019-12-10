@@ -38,6 +38,17 @@ path {
 .legend .side_impact { background-color: #1f77b4; }
 
 </style>
+<style type="text/css">
+  @font-face {font-family:"NanumBarunGothic"; src:url('NanumBarunGothic.otf');}
+  h1 { font-size:40px; font-family:"NanumBarunGothic";}
+  h2 { font-size:25px; font-family:"NanumBarunGothic";}
+  p { color: #000000; font-size:20px; font-family:"NanumBarunGothic";}
+</style>
+
+  <h1>가설 1</h1>
+  <h2>2015-16년에는 운전미숙에 관련된 사고 유형이 많을 것이고 이후인 2017-18년도에는 적어질 것이다.
+</h2>
+  <p>→ 생각한 이유 : 2016년 12월에 운전면허시험이 강화되었기 때문</p>
 <body>
 <!-- load the d3.js library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
@@ -183,7 +194,7 @@ var max=d3.max(data, function(d) { return Math.max(d.sidewalk_passage, d.side_im
 
 function mousemove() {
         //Math.round(((max/210)*(210-d3.event.pageY)))
-      div.text(function(d,i){return Math.round(((max/200)*(247-d3.event.pageY))+4)})
+      div.text(function(d,i){return Math.round(((max/200)*(247-d3.event.pageY))+1200)})
       .style("left", (d3.event.pageX - 34) + "px")
       .style("top", (d3.event.pageY - 12) + "px");
 }
@@ -203,7 +214,11 @@ function mouseout() {
     <li><span class="sidewalk_passage"></span> 보도 통행 중 </li>
     <li><span class="side_impact"></span> 측면 충돌 </li>
 </ul>
-</div>
+</div><br><br><br>
+<p>사고 유형이 ‘측면 충돌’과 ‘보도 통행 중’인 사고 데이터만 추출하여 사고량의 추세를 확인해보니 <br>
+2018년에 사고량이 감소하긴 했지만 의미있는 정도로 차이나게 줄어들었다고는 할 순 없다. <br>
+따라서 ‘운전 미숙자의 사고 위험도가 높은 유형’으로 일어나는 사고의 수는 매년 비슷하다고 볼 수 있다.
+</p>
 
 
 </body>
